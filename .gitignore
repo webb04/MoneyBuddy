@@ -1,3 +1,4 @@
 .idea
 .idea/
 .idea/*
+server/aws-gmail.pem
