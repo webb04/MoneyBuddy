@@ -27,7 +27,7 @@
         <img id="sky" src="https://img.gs/bbdkhfbzkk/2048x2048,stretch/http://i.imgur.com/WqlqEkq.jpg" crossorigin="anonymous" />
       </a-assets>
 
-      <a-entity position="-1.5 12 0" text="text: £500; font: exo 2;  style: italic; size: 0.8; weight: bold; height: 0;" material="shader: flat; color:white;"></a-entity>
+      <a-entity position="-1.5 12 0" text="text: £500.77; font: exo 2;  style: italic; size: 0.8; weight: bold; height: 0;" material="shader: flat; color:white;"></a-entity>
         <a-entity position="-1.5 12 0" text="text: £500; font: exo 2;  style: italic; size: 0.8; weight: bold; height: 0; bevelEnabled: true; bevelSize: 0.04; bevelThickness: 0.04; curveSegments: 1;" material="shader: flat; color:white;transparent: true; opacity: 0.4;"></a-entity>
       </a-entity>
 
@@ -41,14 +41,23 @@
       var currentColumn = 0;
       var light = "#E8B03E";
       var dark = "#FFC65D";
+      var lightPenny = "#b34848";
+      var darkPenny = "#863333";
       var offset;
-      for(index = 0; index < 100; index++)
+      var columnPositions = [-10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18];
+
+      var money = 500.77;
+      var change = (money % 1) * 100;
+      money = money - change;
+      console.log(change);
+      for(index = 0; index < money; index++)
         {
           height += 0.1;
           offset = Math.random() * 0.4;
-          if (index % 100 == 0)
+          if (index % 50 == 0)
           {
-            currentColumn = currentColumn + 1;
+            var height = -0.1;
+            currentColumn = columnPositions.shift();
           }
           if (index % 2 == 0)
           {
@@ -58,8 +67,28 @@
           {
             color = light;
           }
-          document.write("<a-cylinder position='" + offset + " " + height + "0' rotation='0 30 0' width='1' height='.1' depth='1'  color='" + color + "' material='metalness:0.3';></a-cylinder>")
+          document.write("<a-cylinder position='" + currentColumn + " " + height + " " + offset + "' rotation='0 30 0' width='1' height='.1' depth='1'  color='" + color + "' material='metalness:0.3';></a-cylinder>")
         }
+
+        for(index = 0; index < change; index++)
+          {
+            height += 0.1;
+            offset = Math.random() * 0.4;
+            if (index % 50 == 0)
+            {
+              var height = -0.1;
+              currentColumn = columnPositions.shift();
+            }
+            if (index % 2 == 0)
+            {
+              color = darkPenny;
+            }
+            else
+            {
+              color = lightPenny;
+            }
+            document.write("<a-cylinder position='" + currentColumn + " " + height + " " + offset + "' rotation='0 30 0' width='1' height='.1' depth='1'  color='" + color + "' material='metalness:0.3';></a-cylinder>")
+          }
       </script>
       <a-entity position="0 0 0"
         geometry="primitive: plane; width: 10000; height: 10000;" rotation="-90 0 0"
