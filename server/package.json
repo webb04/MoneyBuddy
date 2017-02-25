@@ -8,8 +8,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh argha@13.73.155.18https://github.com/webb04/money-buddy"
+    "url": "https://github.com/webb04/money-buddy"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.1"
+  }
 }
