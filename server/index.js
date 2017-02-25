@@ -1,10 +1,11 @@
-const PORT = 80;
+const PORT = 8080;
 const HOST = "0.0.0.0";
 
 var express = require("express");
 var app = express();
 
 app.get('/', function (req, res) {
+    console.log(req);
     res.send('Hello World');
 });
 
