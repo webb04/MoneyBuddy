@@ -1,0 +1,15 @@
+{
+  "name": "money-buddy",
+  "version": "1.0.0",
+  "description": "Money buddy API",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh argha@13.73.155.18https://github.com/webb04/money-buddy"
+  },
+  "author": "",
+  "license": "ISC"
+}
