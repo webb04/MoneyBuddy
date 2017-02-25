@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>A-Frame 80s</title>
+    <title>Money Buddy</title>
     <meta name="description" content="Vaporwave aesthetic text By Ada Rose Edwards.">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@lady_ada_king">
@@ -27,20 +27,45 @@
         <img id="sky" src="https://img.gs/bbdkhfbzkk/2048x2048,stretch/http://i.imgur.com/WqlqEkq.jpg" crossorigin="anonymous" />
       </a-assets>
 
-      <a-entity position="-1.5 7 0" text="text: £500; font: exo 2;  style: italic; size: 0.8; weight: bold; height: 0;" material="shader: flat; color:white;"></a-entity>
-        <a-entity position="-1.5 7 0" text="text: £500; font: exo 2;  style: italic; size: 0.8; weight: bold; height: 0; bevelEnabled: true; bevelSize: 0.04; bevelThickness: 0.04; curveSegments: 1;" material="shader: flat; color:white;transparent: true; opacity: 0.4;"></a-entity>
+      <a-entity position="-1.5 12 0" text="text: £500; font: exo 2;  style: italic; size: 0.8; weight: bold; height: 0;" material="shader: flat; color:white;"></a-entity>
+        <a-entity position="-1.5 12 0" text="text: £500; font: exo 2;  style: italic; size: 0.8; weight: bold; height: 0; bevelEnabled: true; bevelSize: 0.04; bevelThickness: 0.04; curveSegments: 1;" material="shader: flat; color:white;transparent: true; opacity: 0.4;"></a-entity>
       </a-entity>
 
-      <a-entity position="-3.75 4 -1" scale="0.6 1.2 1" text="text: MoneyBuddy; font: exo 2 black; bevelEnabled: true; bevelSize: 0.1; bevelThickness: 0.1; curveSegments: 1; size: 1.5; height: 0.5;" material="color:pink; metalness:0.9; roughness: 0.05; sphericalEnvMap: #chrome;"></a-entity>
+      <a-entity position="-13.8 8 -6" scale="1.9 2.2 1" text="text: Money   Buddy; font: exo 2 black; bevelEnabled: true; bevelSize: 0.1; bevelThickness: 0.1; curveSegments: 1; size: 1.5; height: 0.5;" material="color:pink; metalness:0.9; roughness: 0.05; sphericalEnvMap: #chrome;"></a-entity>
       <!-- <a-entity text="text: Income" position="-8.75 7 0" material="color: green;"></a-entity> -->
       <!-- <a-entity text="text: £500" position="-0.75 7 0" material="color: white;"></a-entity> -->
       <!-- <a-entity text="text: Outcome" position="7.25 7 0" material="color: red;"></a-entity> -->
-
+      <script>
+      var height = -0.1;
+      var coins = 100;
+      var currentColumn = 0;
+      var light = "#E8B03E";
+      var dark = "#FFC65D";
+      var offset;
+      for(index = 0; index < 100; index++)
+        {
+          height += 0.1;
+          offset = Math.random() * 0.4;
+          if (index % 100 == 0)
+          {
+            currentColumn = currentColumn + 1;
+          }
+          if (index % 2 == 0)
+          {
+            color = dark;
+          }
+          else
+          {
+            color = light;
+          }
+          document.write("<a-cylinder position='" + offset + " " + height + "0' rotation='0 30 0' width='1' height='.1' depth='1'  color='" + color + "' material='metalness:0.3';></a-cylinder>")
+        }
+      </script>
       <a-entity position="0 0 0"
         geometry="primitive: plane; width: 10000; height: 10000;" rotation="-90 0 0"
         material="src: #grid; repeat: 10000 10000; transparent: true;metalness:0.6; roughness: 0.4; sphericalEnvMap: #sky;"></a-entity>
 
-        <a-cylinder position="0 0 0" rotation="0 30 0" width="1" height=".1" depth="1"  color="#E8B03E" material="metalness:0.3;"></a-cylinder>
+        <!-- <a-cylinder position="0 0 0" rotation="0 30 0" width="1" height=".1" depth="1"  color="#E8B03E" material="metalness:0.3;"></a-cylinder>
         <a-cylinder position=".1 .2 0" rotation="0 30 0" width="1" height=".1" depth="1"  color="#FFC65D" material="metalness:0.3;"></a-cylinder>
         <a-cylinder position="-.1 .3 0" rotation="0 30 0" width="1" height=".1" depth="1"  color="#E8B03E" material="metalness:0.3;"></a-cylinder>
         <a-cylinder position="0 .4 0" rotation="0 30 0" width="1" height=".1" depth="1"  color="#FFC65D" material="metalness:0.3;"></a-cylinder>
@@ -62,14 +87,14 @@
         <a-cylinder position="-3.1 .3 0" rotation="0 30 0" width="1" height=".1" depth="1"  color="#E8B03E" material="metalness:0.3;"></a-cylinder>
         <a-cylinder position="-3 .4 0" rotation="0 30 0" width="1" height=".1" depth="1"  color="#FFC65D" material="metalness:0.3;"></a-cylinder>
         <a-cylinder position="-2.9 .5 0" rotation="0 30 0" width="1" height=".1" depth="1"  color="#E8B03E" material="metalness:0.3;"></a-cylinder>
-
-      <!-- <a-entity light="color: #ccccff; intensity: 1; type: ambient;" visible=""></a-entity>
-      <a-entity light="color: ffaaff; intensity: 1.5" position="5 5 5"></a-entity>
-      <a-entity light="color: white; intensity: 0.5" position="-5 5 15"></a-entity>
-      <a-entity light="color: white; type: ambient;"></a-entity> -->
+ -->
+      <a-entity light="color: #ccccff; intensity: 0.2; type: ambient;" visible=""></a-entity>
+      <a-entity light="color: ffaaff; intensity: 0.2" position="5 5 5"></a-entity>
+      <a-entity light="color: white; intensity: 0.2" position="-5 5 15"></a-entity>
+      <a-entity light="color: white; type: ambient;"></a-entity>
 
       <a-sky src="#sky" rotation="0 -90 0"></a-sky>
-      <a-entity position="0 0 10">
+      <a-entity position="0 2 13">
         <a-camera></a-camera>
       </a-entity>
     </a-scene>
