@@ -1,0 +1,21 @@
+{
+  "name": "money-buddy",
+  "version": "1.0.0",
+  "description": "Money buddy API",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/webb04/money-buddy"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "fetch": "^1.1.0",
+    "node-fetch": "^1.6.3"
+  }
+}
