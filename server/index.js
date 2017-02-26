@@ -6,7 +6,16 @@ var app = express();
 //var fetch = require("fetch");
 var https = require("https");
 
-const DATA = `{
+const BALANCE = `{
+  "balance": 3435,
+  "currency": "GBP",
+  "spend_today": 0,
+  "local_currency": "",
+  "local_exchange_rate": 0,
+  "local_spend": []
+}`;
+
+const TRANSACTIONS = `{
   "transactions": [
     {
       "id": "tx_00009DDKpQsKmdixXfCtYP",
@@ -13212,14 +13221,19 @@ const DATA = `{
 }`;
 
 
+const USER_ID = "user_00009D8pN8YRQqRivywCMj";
+const ACCOUNT_ID = "acc_00009D8pYeGjrJEIwnIbZp";
+const ACCOUNT_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaSI6Im9hdXRoY2xpZW50XzAwMDA5NFB2SU5ER3pUM2s2dHo4anAiLCJleHAiOjE0ODgwOTE0NTUsImlhdCI6MTQ4ODA2OTg1NSwianRpIjoidG9rXzAwMDA5SG54TWR3ZUJqQWpTWG5BSXIiLCJ1aSI6InVzZXJfMDAwMDlEOHBOOFlSUXFSaXZ5d0NNaiIsInYiOiIyIn0.pYf_P3_r8MRu-1j77FlSoQjAUmKX1zAVgQ8mKYUOhi";
+const TRANSACTION_API = "https://api.monzo.com/transactions?expand[]=merchant&account_id=" + ACCOUNT_ID;
+const BALANCE_API = "https://api.monzo.com/balance?account_id=" + ACCOUNT_ID;
 
 app.get('/example', function (req, res) {
-    const USER_ID = "user_00009D8pN8YRQqRivywCMj";
-    const ACCOUNT_ID = "acc_00009D8pYeGjrJEIwnIbZp";
-    const ACCOUNT_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaSI6Im9hdXRoY2xpZW50XzAwMDA5NFB2SU5ER3pUM2s2dHo4anAiLCJleHAiOjE0ODgwNjM1NDMsImlhdCI6MTQ4ODA0MTk0MywianRpIjoidG9rXzAwMDA5SG5IcVpYMnhubTRTc1A4ZVAiLCJ1aSI6InVzZXJfMDAwMDlEOHBOOFlSUXFSaXZ5d0NNaiIsInYiOiIyIn0.GX7RaC2Ek4MTzOD34P0HYv1oZEKoykIGRk6qFYXYsmw";
-    const TRANSACTION_API = "https://api.monzo.com/transactions?expand[]=merchant&account_id=" + ACCOUNT_ID;
+    res.send(TRANSACTIONS);
+});
 
-    res.send(DATA);
+app.get('/balance', function(req, res) {
+    "use strict";
+    res.send(BALANCE);
 });
 
 var server = app.listen(PORT, HOST, function () {
