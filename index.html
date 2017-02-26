@@ -1,17 +1,9 @@
 <!DOCTYPE html>
-<!-- By Ada Rose Edwards @lady_ada_king. -->
 <html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Money Buddy</title>
-    <meta name="description" content="Vaporwave aesthetic text By Ada Rose Edwards.">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@lady_ada_king">
-    <meta name="twitter:title" content="VR Vaporwa(v|r)e">
-    <meta name="twitter:description" content="What is vaporwave? According to commenters in various music forums, it's 'chillwave for Marxists,' 'post-elevator music,' 'corporate smooth jazz Windows 95 pop,'">
-    <meta name="twitter:image" content="http://i.imgur.com/B84J9uG.jpg">
-    <meta property="og:image" content="https://raw.githubusercontent.com/ngokevin/kframe/master/components/text/examples/vaporwave/preview.jpg"></meta>
     <script src="https://rawgit.com/aframevr/aframe/917c06889ee1f3f79b7b1bbd9eab9815f9512503/dist/aframe.min.js"></script>
     <script src="build.js"></script>
     <script src="https://cdn.rawgit.com/AdaRoseEdwards/facetype-fonts-for-a-frame/master/Dawning-of-a-New-Day_Regular.js"></script>
@@ -36,10 +28,15 @@
       </a-entity>
 
       <a-entity position="-13.8 8 -6" scale="1.9 2.2 1" text="text: Money   Buddy; font: exo 2 black; bevelEnabled: true; bevelSize: 0.1; bevelThickness: 0.1; curveSegments: 1; size: 1.5; height: 0.5;" material="color:pink; metalness:0.9; roughness: 0.05; sphericalEnvMap: #chrome;"></a-entity>
-      <!-- <a-entity text="text: Income" position="-8.75 7 0" material="color: green;"></a-entity> -->
-      <!-- <a-entity text="text: £500" position="-0.75 7 0" material="color: white;"></a-entity> -->
-      <!-- <a-entity text="text: Outcome" position="7.25 7 0" material="color: red;"></a-entity> -->
+
       <script>
+      // fetch('/balance').then(function(data) {
+      //   return data;
+      // }).then(function(data) {
+      //   console.log(data);
+      // })
+
+      var domElementsToRemove = [];
       var height = -0.1;
       var coins = 100;
       var currentColumn = 0;
@@ -70,9 +67,8 @@
           {
             color = light;
           }
-          // document.write("<a-entity id='pound"+index+"' position='" + currentColumn + " " + height + " " + offset + "' rotation='0 30 0' width='1' height='.1' depth='1'  color='" + color + "' material='metalness:0.3'; geometry='primitive: cylinder'><a-animation attribute='direction' dur='2000' to='0 360 0 begin="fade"></a-animation></a-entity>");
-          document.write("<a-cylinder id='pound"+index+"' position='" + currentColumn + " " + height + " " + offset + "' rotation='0 30 0' width='1' height='.1' depth='1'  color='" + color + "' material='metalness:0.3';> <a-animation attribute='rotation' begin='fade' from='20 0 0' to='20 360 0' direction='alternate' dur='4000' repeat='indefinite' easing='ease'></a-animation></a-cylinder>")
-          }
+          document.write("<a-cylinder id='pound"+index+"' position='" + currentColumn + " " + height + " " + offset + "' rotation='0 30 0' width='1' height='.1' depth='1'  color='" + color + "' material='metalness:0.3';> <a-animation attribute='position' to='2 4 -8' begin='position'></a-animation><a-animation attribute='material.opacity' begin='fade' to='0'></a-animation></a-cylinder>")
+        }
 
         for(index = 0; index < change; index++)
           {
@@ -91,7 +87,7 @@
             {
               color = lightPenny;
             }
-            document.write("<a-cylinder position='" + currentColumn + " " + height + " " + offset + "' rotation='0 30 0' width='1' height='.1' depth='1'  color='" + color + "' material='metalness:0.3';></a-cylinder>")
+            document.write("<a-cylinder position='" + currentColumn + " " + height + " " + offset + "' rotation='0 30 0' width='0.1' height='.1' depth='1'  color='" + color + "' material='metalness:0.3';></a-cylinder>")
           }
 
           function moneyWithdraw(pounds, pence) {
@@ -99,6 +95,8 @@
             for (var i = pounds; i > 0; i--) {
               var id = 'pound' + localMoney--;
               // document.getElementById(id).removal();
+              domElementsToRemove.push(id);
+              document.getElementById(id).emit('position');
               document.getElementById(id).emit('fade');
             }
 
@@ -109,7 +107,7 @@
           }
 
           setTimeout(function() {
-            moneyWithdraw(50, 0)
+            moneyWithdraw(134, 0)
           }, 5000);
 
           Element.prototype.removal = function() {
