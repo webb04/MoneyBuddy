@@ -19,8 +19,7 @@
         <img id="sky" src="https://img.gs/bbdkhfbzkk/2048x2048,stretch/http://i.imgur.com/WqlqEkq.jpg" crossorigin="anonymous" />
       </a-assets>
 
-      <a-entity position="-1.5 12 0" text="text: £500.77; font: exo 2;  style: italic; size: 0.8; weight: bold; height: 0;" material="shader: flat; color:white;"></a-entity>
-        <a-entity position="-1.5 12 0" text="text: £500; font: exo 2;  style: italic; size: 0.8; weight: bold; height: 0; bevelEnabled: true; bevelSize: 0.04; bevelThickness: 0.04; curveSegments: 1;" material="shader: flat; color:white;transparent: true; opacity: 0.4;"></a-entity>
+      <a-entity id="money-label" position="-1.5 12 0" text="text: £500.77; font: exo 2;  style: italic; size: 0.8; weight: bold; height: 0;" material="shader: flat; color:white;"></a-entity>
       </a-entity>
 
       <a-entity position="-13.8 8 -6" scale="1.9 2.2 1" text="text: Money   Buddy; font: exo 2 black; bevelEnabled: true; bevelSize: 0.1; bevelThickness: 0.1; curveSegments: 1; size: 1.5; height: 0.5;" material="color:pink; metalness:0.9; roughness: 0.05; sphericalEnvMap: #chrome;"></a-entity>
@@ -87,15 +86,6 @@
         <a-entity position="-27 0.5 42" rotation="0 110 0" text="text: 8.Cash                          5%; font: exo 2;  style: italic; size: 0.8; weight: bold; height: 0; bevelEnabled: true; bevelSize: 0.04; bevelThickness: 0.04; curveSegments: 1;" material="shader: flat; color:white;transparent: true; opacity: 0.4;"></a-entity>
       </a-entity>
       <script>
-
-
-
-      // fetch('/balance').then(function(data) {
-      //   return data;
-      // }).then(function(data) {
-      //   console.log(data);
-      // })
-
       var domElementsToRemove = [];
       var height = -0.1;
       var coins = 100;
@@ -105,10 +95,13 @@
       var lightPenny = "#b34848";
       var darkPenny = "#863333";
       var offset;
-      var columnPositions = [-10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18];
+      var columnPositions = [-10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 11.5, 13, 14.5, 16];
       var money = 500.77;
-      var change = (money % 1) * 100;
+      var change = Math.round((money % 1) * 100);
+
       money = money - (change/100);
+      var localPounds = money-1;
+      var localChange = change-1;
 
       for(index = 0; index < money; index++)
         {
@@ -147,18 +140,31 @@
             {
               color = lightPenny;
             }
-            document.write("<a-cylinder position='" + currentColumn + " " + height + " " + offset + "' rotation='0 30 0' width='0.1' height='.1' depth='1'  color='" + color + "' material='metalness:0.3';></a-cylinder>")
+            document.write("<a-cylinder id='pence"+index+"' position='" + currentColumn + " " + height + " " + offset + "' rotation='0 30 0' radius='0.5' height='.1' depth='1'  color='" + color + "' material='metalness:0.3';><a-animation attribute='position' to='2 4 -8' begin='position'></a-animation><a-animation attribute='material.opacity' begin='fade' to='0'></a-animation></a-cylinder>")
           }
 
           function moneyWithdraw(pounds, pence) {
-            var localMoney = money-1;
             for (var i = pounds; i > 0; i--) {
-              var id = 'pound' + localMoney--;
+              var id = 'pound' + localPounds--;
+              console.log("LOCALPOUNDS: " + localPounds);
               // document.getElementById(id).removal();
               domElementsToRemove.push(id);
               document.getElementById(id).emit('position');
               document.getElementById(id).emit('fade');
             }
+            // document.getElementById('money-label').setAttribute('text', "text: £" + Math.round(localPounds) + "; font: exo 2;  style: italic; size: 0.8; weight: bold; height: 0;")
+
+            console.log("PENCE: " + pence);
+            for (var i = pence; i > 0; i--) {
+              var id = 'pence' + localChange--;
+              console.log("localChange: " + localChange);
+              // document.getElementById(id).removal();
+              domElementsToRemove.push(id);
+              document.getElementById(id).emit('position');
+              document.getElementById(id).emit('fade');
+            }
+            document.getElementById('money-label').setAttribute('text', "text: £" + localPounds + "." + localChange + "; font: exo 2;  style: italic; size: 0.8; weight: bold; height: 0;")
+
 
           }
 
@@ -167,8 +173,124 @@
           }
 
           setTimeout(function() {
-            moneyWithdraw(134, 0)
-          }, 5000);
+            moneyWithdraw(34, 2)
+          }, 1000);
+
+          setTimeout(function() {
+            moneyWithdraw(12, 2)
+          }, 2000);
+
+          setTimeout(function() {
+            moneyWithdraw(8, 5)
+          }, 4000);
+
+          setTimeout(function() {
+            moneyWithdraw(13, 13)
+          }, 6000);
+
+          setTimeout(function() {
+            moneyWithdraw(10, 0)
+          }, 8000);
+
+          setTimeout(function() {
+            moneyWithdraw(19, 14)
+          }, 9000);
+
+          setTimeout(function() {
+            moneyWithdraw(4, 0)
+          }, 11000);
+
+          setTimeout(function() {
+            moneyWithdraw(20, 0)
+          }, 12000);
+
+          setTimeout(function() {
+            moneyWithdraw(11, 5)
+          }, 13000);
+
+          setTimeout(function() {
+            moneyWithdraw(3, 4)
+          }, 14000);
+
+          setTimeout(function() {
+            moneyWithdraw(19, 3)
+          }, 15000);
+
+          setTimeout(function() {
+            moneyWithdraw(4, 0)
+          }, 16000);
+
+          setTimeout(function() {
+            moneyWithdraw(20, 4)
+          }, 17000);
+
+          setTimeout(function() {
+            moneyWithdraw(11, 5)
+          }, 29000);
+
+          setTimeout(function() {
+            moneyWithdraw(8, 0)
+          }, 20000);
+
+          setTimeout(function() {
+            moneyWithdraw(19, 0)
+          },21000);
+
+          setTimeout(function() {
+            moneyWithdraw(9, 0)
+          }, 23000);
+
+          setTimeout(function() {
+            moneyWithdraw(20, 0)
+          }, 24000);
+
+          setTimeout(function() {
+            moneyWithdraw(10, 1)
+          }, 26000);
+
+          setTimeout(function() {
+            moneyWithdraw(13, 1)
+          }, 27000);
+
+        setTimeout(function() {
+          moneyWithdraw(19, 0)
+        }, 28000);
+
+        setTimeout(function() {
+          moneyWithdraw(4, 0)
+        }, 29000);
+
+        setTimeout(function() {
+          moneyWithdraw(20, 4)
+        }, 29500);
+
+        setTimeout(function() {
+          moneyWithdraw(6, 1)
+        }, 30000);
+
+        setTimeout(function() {
+          moneyWithdraw(23, 0)
+        }, 31000);
+
+        setTimeout(function() {
+          moneyWithdraw(15, 1)
+        }, 31500);
+
+        setTimeout(function() {
+          moneyWithdraw(7, 0)
+        }, 33000);
+
+        setTimeout(function() {
+          moneyWithdraw(11, 2)
+        }, 34000);
+
+        setTimeout(function() {
+          moneyWithdraw(20, 0)
+        }, 35000);
+
+        setTimeout(function() {
+          moneyWithdraw(16, 0)
+        }, 37000);
 
           Element.prototype.removal = function() {
               this.parentElement.removeChild(this);
