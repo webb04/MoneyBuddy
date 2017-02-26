@@ -45,11 +45,10 @@
       var darkPenny = "#863333";
       var offset;
       var columnPositions = [-10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18];
-
       var money = 500.77;
       var change = (money % 1) * 100;
-      money = money - change;
-      console.log(change);
+      money = money - (change/100);
+
       for(index = 0; index < money; index++)
         {
           height += 0.1;
@@ -67,8 +66,9 @@
           {
             color = light;
           }
-          document.write("<a-cylinder position='" + currentColumn + " " + height + " " + offset + "' rotation='0 30 0' width='1' height='.1' depth='1'  color='" + color + "' material='metalness:0.3';></a-cylinder>")
-        }
+          // document.write("<a-entity id='pound"+index+"' position='" + currentColumn + " " + height + " " + offset + "' rotation='0 30 0' width='1' height='.1' depth='1'  color='" + color + "' material='metalness:0.3'; geometry='primitive: cylinder'><a-animation attribute='direction' dur='2000' to='0 360 0 begin="fade"></a-animation></a-entity>");
+          document.write("<a-cylinder id='pound"+index+"' position='" + currentColumn + " " + height + " " + offset + "' rotation='0 30 0' width='1' height='.1' depth='1'  color='" + color + "' material='metalness:0.3';> <a-animation attribute='rotation' begin='fade' from='20 0 0' to='20 360 0' direction='alternate' dur='4000' repeat='indefinite' easing='ease'></a-animation></a-cylinder>")
+          }
 
         for(index = 0; index < change; index++)
           {
@@ -88,6 +88,35 @@
               color = lightPenny;
             }
             document.write("<a-cylinder position='" + currentColumn + " " + height + " " + offset + "' rotation='0 30 0' width='1' height='.1' depth='1'  color='" + color + "' material='metalness:0.3';></a-cylinder>")
+          }
+
+          function moneyWithdraw(pounds, pence) {
+            var localMoney = money-1;
+            for (var i = pounds; i > 0; i--) {
+              var id = 'pound' + localMoney--;
+              // document.getElementById(id).removal();
+              document.getElementById(id).emit('fade');
+            }
+
+          }
+
+          function moneyIncome(pounds, pence) {
+
+          }
+
+          setTimeout(function() {
+            moneyWithdraw(50, 0)
+          }, 5000);
+
+          Element.prototype.removal = function() {
+              this.parentElement.removeChild(this);
+          }
+          NodeList.prototype.removal = HTMLCollection.prototype.remove = function() {
+              for(var i = this.length - 1; i >= 0; i--) {
+                  if(this[i] && this[i].parentElement) {
+                      this[i].parentElement.removeChild(this[i]);
+                  }
+              }
           }
       </script>
       <a-entity position="0 0 0"
