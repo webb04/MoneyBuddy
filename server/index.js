@@ -2,9 +2,12 @@ const PORT = 8080;
 const HOST = "0.0.0.0";
 
 var express = require("express");
+var cors = require("cors");
 var app = express();
 //var fetch = require("fetch");
 var https = require("https");
+
+app.use(cors);
 
 const BALANCE = `{
   "balance": 3435,
