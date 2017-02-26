@@ -17,6 +17,9 @@
     <script src="https://cdn.rawgit.com/AdaRoseEdwards/facetype-fonts-for-a-frame/master/Dawning-of-a-New-Day_Regular.js"></script>
     <script src="https://cdn.rawgit.com/AdaRoseEdwards/facetype-fonts-for-a-frame/master/Exo%202%20Black_Regular.js"></script>
     <script src="https://cdn.rawgit.com/AdaRoseEdwards/facetype-fonts-for-a-frame/master/Exo%202_Bold%20Italic.js"></script>
+    <script src="https://rawgit.com/impronunciable/aframe-chartbuilder-component/master/dist/aframe-chartbuilder-component.min.js"></script>
+    <script src=”http://d3js.org/d3.v3.min.js” charset=”utf-8″></script>
+
   </head>
   <body>
     <a-scene inspector="url: https://aframe.io/aframe-inspector/dist/aframe-inspector.min.js">
@@ -39,6 +42,12 @@
       <!-- <a-entity text="text: Income" position="-8.75 7 0" material="color: green;"></a-entity> -->
       <!-- <a-entity text="text: £500" position="-0.75 7 0" material="color: white;"></a-entity> -->
       <!-- <a-entity text="text: Outcome" position="7.25 7 0" material="color: red;"></a-entity> -->
+
+      <!-- Chart builder -->
+      <a-entity chartbuilder="src: http://52.56.173.177:8080/example"></a-entity>
+
+
+
       <script>
       var height = -0.1;
       var coins = 100;
