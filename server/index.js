@@ -3,6 +3,7 @@ const HOST = "0.0.0.0";
 
 var express = require("express");
 var app = express();
+var path = require('path');
 //var fetch = require("fetch");
 var https = require("https");
 
@@ -13227,6 +13228,8 @@ const ACCOUNT_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaSI6Im9hdXRoY2xp
 const TRANSACTION_API = "https://api.monzo.com/transactions?expand[]=merchant&account_id=" + ACCOUNT_ID;
 const BALANCE_API = "https://api.monzo.com/balance?account_id=" + ACCOUNT_ID;
 
+app.use(express.static(__dirname + '/public'));
+
 app.get('/example', function (req, res) {
     res.send(TRANSACTIONS);
 });
@@ -13236,10 +13239,14 @@ app.get('/balance', function(req, res) {
     res.send(BALANCE);
 });
 
+app.get('/', function(req, res) {
+    "use strict";
+    res.sendFile(path.join(__dirname + '/index.html'));
+});
+
 var server = app.listen(PORT, HOST, function () {
     var host = server.address().address;
     var port = server.address().port;
 
     console.log("Example app listening at http://%s:%s", host, port)
 });
-
