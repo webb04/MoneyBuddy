@@ -5,7 +5,6 @@ var express = require("express");
 var cors = require("cors");
 var app = express();
 var path = require('path');
-//var fetch = require("fetch");
 var https = require("https");
 
 app.use(cors());
